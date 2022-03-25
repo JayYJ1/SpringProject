@@ -1,0 +1,97 @@
+plugins {
+    id 'org.springframework.boot' version '2.5.2'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+// 여기에 설치 파일들 쓰는 곳인데 쓰게 되면 우측 상단에 새로 고침이 되요
+// 이거 하시면 여기에 쓰신 파일들이 자동으로 import 됩니다!
+//오...ㄷㄷ 저 좀 많이 큰일난거 같습니다  ??
+//아시다시피 제가 다른분들에 비해 기여도가 현저히 적은데
+//이게 실은 자바를 모르는거부터 시작해서 오는건데
+//여러분들 따라가기가 많ㄷ이 벅찬거 같습니다
+// 저도 자바 처음 써 봤습니다
+// 개발 자체가 다 알고 하기보다는 하나씩 알아가면서 하는게 있고
+// 지금 다른 분들도 하나씩 검색 해가면서 배우고 시행착오를 겪으면서
+// 프로젝트를 진행하는거기 때문에
+// 잘 안될수도 있어요
+// 저도 지금 html 부분에서만 개발을 해서
+// th 쓰는 게시판 부분만 잘 진행하고 있는거지
+// 자바쪽으로 넘어오면 시간도 오래 걸리고 많이 힘들어요..
+// 기여도가 낮다고 자책하시지 마시고
+// 같이 힘들어하는 거니까 천천히 해보시고 안되는 거는 교수님이나 같이 하는 분들에게 질문하세요!
+// 저는 질문을 잘 못해서 웹페이지 열심히 찾아다니지만요..ㅋㅋㅋ
+//그.. 되게 신기한게 찾아보는건 찾아보는데 본인 코드에 접목시키는게 정말 신기한거 같아요
+//저 아직 이거 동작도 이해 잘 못하는거 같아요 아는게
+//컨트롤러에서 데이터쪽으로 요청해서 서버가서 데이터 받아오면 다시 컨트롤러에서 뷰로 가서 보여준다? 정도..
+// 저도 처음에 컨트롤러랑 리파지토리? 이거 잘 몰라서
+// 유튜브에 검색해서 사용법 찾고
+// 유교수님 강의 10번씩 돌려보고 그랬어요
+// 이거는 사람마다 다를거 같긴한데
+// 저는 새로운 개념? 을 잘 이해가 안되면 여러 방면으로 찾아서 이해하려고 하거든요
+// 프로젝트가 이해가 안되면 만드는것도 많이 힘들어지니까
+// 초반에 속도가 안 나오더라도 개념은 확실히 잡으려고 많이 노력해요
+// 유튜브나 강의 보시면서 개념 다시 잡아보시는 것도 추천드려요! <<혹시 유튭어디 보셨어요?
+// 어디서 본 건지는 기억기 안 나는데
+// 저는 한글 강의 보다는 영어 강의 번역해서 많이 봐요
+// 한글 번역 되어 있는 영상도 많이 있고
+// 웹페이지 같은 경우는 자동으로 구글 번역이 되서
+// 영어쪽으로 많이 찾아봐요!
+// 이런식으로?? 많이 찾아봐요
+//지금 제가 달레마에 빠진게 지금 다들 구현된거? 까지 합쳐서 그다음부터 진행해야하는데 자꾸 안되갖고
+// 그 혹시 일단 웹페이지 켜놓고 동작 안되는거좀 봐주실 수 있나요..? 그다음부턴 말씀해주신대로 찾아보겠습니다!
+//막 저번처럼 회원가입할때 매핑오류 뜨고 그럴까봐..
+configurations {
+    all {
+        // 다른 로깅 사용을 위한 spring-boot-starter-logging 제외
+        exclude group:'org.springframework.boot', module:'spring-boot-starter-logging'
+    }
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+    implementation group: 'com.zaxxer', name: 'HikariCP', version: '4.0.3'
+    implementation 'com.oracle.database.jdbc:ojdbc8'
+
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation ("org.springframework.boot:spring-boot-starter-web")
+    // spring-boot-starter-web 라이브러리 의존성 해결시 함께 해결됨
+
+    implementation 'org.aspectj:aspectjrt:1.9.6'
+    implementation 'org.aspectj:aspectjweaver:1.9.6'
+
+    implementation 'org.springframework.boot:spring-boot-starter-tomcat'
+
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
+
+    implementation group: 'com.google.code.gson', name: 'gson', version: '2.8.2'
+
+    testImplementation("org.springframework.boot:spring-boot-starter-test") {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+
+    implementation group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.25'
+    implementation group: 'log4j', name: 'log4j', version: '1.2.17'
+
+
+    implementation group: 'org.apache.httpcomponents', name: 'httpcore', version: '4.4.14'
+    implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.13'
+}
+
+test {
+    useJUnitPlatform()
+}
